@@ -57,7 +57,8 @@ func TranslateHandler(w http.ResponseWriter, r *http.Request) {
 	input := r.FormValue("input")
 	var texts []Item
 	for _, lang := range languages {
-		ret, err := gotranslate.Translate("auto", lang, input)
+		//ret, err := gotranslate.Translate("auto", lang, input)
+		ret, err := gotranslate.SimpleTranslate("auto", lang, input)
 		if err != nil {
 			mustEncode(w, struct {
 				Status  string `json:"status"`
@@ -66,7 +67,8 @@ func TranslateHandler(w http.ResponseWriter, r *http.Request) {
 			}{Status: "error", Message: err.Error(), Lang: lang})
 			return
 		}
-		texts = append(texts, Item{Language: lang, Text: ret.Sentences[0].Trans})
+		//texts = append(texts, Item{Language: lang, Text: ret.Sentences[0].Trans})
+		texts = append(texts, Item{Language: lang, Text: ret})
 	}
 	mustEncode(w, texts)
 }
