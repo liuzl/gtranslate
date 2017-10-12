@@ -10,6 +10,14 @@ $(document).ready(function() {
             T(input);
         }
     });
+    $("#input").on('keypress', function(e) {
+        if (e.ctrlKey && e.which == 13) {
+            var input = $('#input').val().trim();
+            if (input != "") {
+                T(input);
+            }
+        }
+    });
 });
 
 function T(input) {
