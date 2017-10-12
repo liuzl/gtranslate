@@ -11,6 +11,7 @@ import (
 
 var (
 	serverAddr = flag.String("addr", ":8080", "bind address")
+	gt, _      = gotranslate.New(gotranslate.TRANSLATE_COM_ADDR, nil)
 	languages  = []string{
 		"ar",
 		"bn",
@@ -58,7 +59,7 @@ func TranslateHandler(w http.ResponseWriter, r *http.Request) {
 	var texts []Item
 	for _, lang := range languages {
 		//ret, err := gotranslate.Translate("auto", lang, input)
-		ret, err := gotranslate.SimpleTranslate("auto", lang, input)
+		ret, err := gt.SimpleTranslate("auto", lang, input)
 		if err != nil {
 			mustEncode(w, struct {
 				Status  string `json:"status"`
