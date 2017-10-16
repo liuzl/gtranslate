@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#input").focus();
     var input = GetQueryString("input");
     if (input != null) {
         $('#input').val(input);
